@@ -1,0 +1,29 @@
+-- check for nulls or buplicates in primary key
+-- Expectation : no results
+
+SELECT 
+cst_id
+FROM silver.crm_cust_info 
+GROUP BY cst_id
+HAVING COUNT(*) > 1 or cst_id is null 
+
+---Check fro unwanted spaces
+-- Expectations is no results
+
+ 
+-- Data Standardization & Consistancy check
+-- Do we prefare Gender as abfreviation or full form ?
+--if abbreviation then we can check for values other than M and F
+
+SELECT DISTINCT cst_gndr
+FROM silver.crm_cust_info
+WHERE cst_gndr NOT IN ('M','F') OR cst_gndr is null
+
+-- Done with standardization of gender ,now we can check for material status
+-- SAMe process as above
+
+SELECT DISTINCT cst_gndr
+FROM silver.crm_cust_info
+WHERE cst_gndr NOT IN ('M','F') OR cst_gndr is null
+
+-- AFTER CHECKING FOR ALL THE DATA QUALITY ISSUES WE CAN PROCEED WITH LOADING THE
